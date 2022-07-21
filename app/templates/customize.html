@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        table, td {
+            border: 1px solid;
+        }
+
+        td {
+        padding: 10px;
+        }
+    </style>
+
+    <h1 style="color: black;">Dostosuj swoje zamówienie:</h1>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <form method="POST">
+            <div class="card">
+                <div class="card-header">
+                    <p style="text-align:left; color: #000000; margin-top: 10px;">
+                        <b style="font-size: 0.25in;">{{entry.pizza_name}} </b>
+                        <span style="float:right; color: #000000;">
+                            <button type="submit" class="btn btn-primary" style="float: right; border-radius: 20px;">Dodaj do koszyka</button>   
+                        </span>
+                    </p>
+                </div>
+                <div class="card-body">
+                        <p class="card-text mb-0">
+                            <table>
+                                {% if not entry.is_ham %}
+                                    <tr>
+                                        <td><label for="ham" style="color: black;">Szynka (+5.00 zł)</label></td>
+                                        <td><input type="checkbox" id="ham" name="ham" value="true" style="width: 20px; height: 20px;"><br></td>
+                                    </tr>
+                                {% endif %}
+                                {% if not entry.is_champignons %}
+                                <tr>
+                                    <td><label for="champignons" style="color: black;">Pieczarki (+4.00 zł)</label></td>
+                                    <td><input type="checkbox" id="champignons" name="champignons" value="true" style="width: 20px; height: 20px;"><br></td>
+                                </tr>    
+                                {% endif %}
+                                {% if not entry.is_pepper %}
+                                <tr>
+                                    <td><label for="pepper" style="color: black;">Papryka (+3.50 zł)</label></td>
+                                    <td><input type="checkbox" id="pepper" name="pepper" value="true" style="width: 20px; height: 20px;"><br></td>
+                                </tr>  
+                                {% endif %}
+                                {% if not entry.is_olives %}
+                                <tr>
+                                    <td><label for="olives" style="color: black;">Oliwki (+4.00 zł)</label></td>
+                                    <td><input type="checkbox" id="olives" name="olives" value="true" style="width: 20px; height: 20px;"><br></td>
+                                </tr>  
+                                {% endif %}
+                                {% if not entry.is_bacon %}
+                                <tr>
+                                    <td><label for="bacon" style="color: black;">Boczek (+5.00 zł)</label></td>
+                                    <td><input type="checkbox" id="bacon" name="bacon" value="true" style="width: 20px; height: 20px;"><br></td>
+                                </tr>         
+                                {% endif %}
+                                {% if not entry.is_corn %}
+                                <tr>
+                                    <td><label for="corn" style="color: black;">Kukurydza (+3.50 zł)</label></td>
+                                    <td><input type="checkbox" id="corn" name="corn" value="true" style="width: 20px; height: 20px;"><br></td>
+                                </tr>                                   
+                                {% endif %}
+                                {% if not entry.is_tuna %}
+                                <tr>
+                                    <td><label for="tuna" style="color: black;">Tuńczyk (+7.00 zł)</label></td>
+                                    <td><input type="checkbox" id="tuna" name="tuna" value="true" style="width: 20px; height: 20px;"><br></td>
+                                </tr>     
+                                {% endif %}
+                                {% if not entry.is_pineapple %}
+                                <tr>
+                                    <td><label for="pineapple" style="color: black;">Ananas (+4.00 zł)</label></td>
+                                    <td><input type="checkbox" id="pineapple" name="pineapple" value="true" style="width: 20px; height: 20px;"><br></td>
+                                </tr>     
+                                {% endif %}
+                            </table>
+                            <h3 style="color:black; margin-top: 25px;"> Wybierz rozmiar (domyślnie 50 cm):</h3>
+                            <label style="color: black; margin-right: 10px;">
+                                <input type="radio" name="size" value="30"> 30 cm
+                            </label>   
+                            <label style="color: black; margin-right: 10px;">
+                                <input type="radio" name="size" value="40"> 40 cm
+                            </label>
+                            <label style="color: black; margin-right: 10px;">
+                                <input type="radio" name="size" value="50" checked> 50 cm
+                            </label>
+                        </p>
+                        
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+{% endblock %}

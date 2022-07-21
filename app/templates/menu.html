@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 style="color: #000000"> Nasza oferta: </h1>
+
+    {% for pizza in pizzas %}
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <b style="color: #000000;">{{ pizza.pizza_name }}</b>
+                        {% set href = '/menu/customize/' + pizza.id|string %}
+                        <a href={{href}}>
+                            <button class="btn btn-primary" style="float: right; border-radius: 20px;">Zamawiam</button>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        {% set ingredients = '' %}
+                        {% if pizza.is_sauce %}
+                            {% set ingredients = ingredients + 'sos, ' %}
+                        {% endif %}
+                        {% if pizza.is_cheese %}
+                            {% set ingredients = ingredients + 'ser, ' %}
+                        {% endif %}
+                        {% if pizza.is_ham %}
+                            {% set ingredients = ingredients + 'szynka, ' %}
+                        {% endif %}
+                        {% if pizza.is_champignons %}
+                            {% set ingredients = ingredients + 'pieczarki, ' %}
+                        {% endif %}
+                        {% if pizza.is_pepper %}
+                            {% set ingredients = ingredients + 'papryka, ' %}
+                        {% endif %}
+                        {% if pizza.is_olives %}
+                            {% set ingredients = ingredients + 'oliwki, ' %}
+                        {% endif %}
+                        {% if pizza.is_bacon %}
+                            {% set ingredients = ingredients + 'boczek, ' %}
+                        {% endif %}
+                        {% if pizza.is_corn %}
+                            {% set ingredients = ingredients + 'kukurydza, ' %}
+                        {% endif %}
+                        {% if pizza.is_tuna %}
+                            {% set ingredients = ingredients + 'tuńczyk, ' %}
+                        {% endif %}
+                        {% if pizza.is_pineapple %}
+                            {% set ingredients = ingredients + 'ananas, ' %}
+                        {% endif %}
+                
+                        <p style="text-align:left; color: #000000;">
+                            {{ ingredients[:-2] }}
+                            <span style="float:right; color: #000000;">
+                                Mała: {{ pizza.price_30 }} zł | Średnia: {{ pizza.price_40 }} zł | Duża: {{ pizza.price_50 }} zł  
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

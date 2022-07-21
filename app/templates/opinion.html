@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% import "utils.html" as utils %}
+
+{% block content %}
+
+  <div class="text-end">
+    <a href="{{ url_for('bp_opinion.opinion_add_get_post') }}">
+      <button class="btn btn-info">Dodaj opinię</button>
+    </a>
+  </div>
+
+  {{ utils.render_pagination(entries, 'bp_opinion.opinion_get') }}
+
+  {% for entry in entries.items %}
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header text-end" style="color:rgb(107, 104, 104)">
+                  <b style="color:rgb(107, 104, 104)">{{ entry.user_name }}</b> | {{ entry.created_at }}
+                </div>
+                <div class="card-body">
+                    <p class="card-text mb-0" style="color:rgb(107, 104, 104)">{{ entry.message }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+  {% endfor %}
+
+  {{ utils.render_pagination(entries, 'bp_opinion.opinion_get') }}
+
+  {% if is_null == 0 %}
+    <h2 style="color: #000000;">
+      Obecnie nie posiadamy żadnych opinii,<br>
+      jeśli chciałbyś podzielić się z nami swoimi wrażeniami,<br>
+      zachęcamy Cię do tego, wystarczy kliknąć "Dodaj opinię"!
+    </h2>
+  {% endif %}
+
+{% endblock %}

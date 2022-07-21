@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="full-img" style="width: 100%; height: 100vh; background: rgba(0, 0, 0, 0.9); position: fixed; top: 0; left: 0; display: none; align-items: center; justify-content: center; z-index: 100;" id="divFullimg">
+        <img id="fullimg" style="width: 90%; max-width: 512px;" src="{{url_for('static', filename='images/pizza1.png')}}" />
+        <span onclick="closeFull()" style="position: absolute; top: 5%; right: 5%; font-size: 30px; color: #ffffff; cursor: pointer;">X</span>
+    </div>
+
+    <div class="img-gallery" style="width: 100%; margin: 100px auto 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); grid-gap: 30px;">
+        <img onclick="openFull(this.src)" style="width: 100%; cursor: pointer;" src="{{url_for('static', filename='images/pizza1.png')}}" />
+        <img onclick="openFull(this.src)" style="width: 100%; cursor: pointer;" src="{{url_for('static', filename='images/pizza2.png')}}" />
+        <img onclick="openFull(this.src)" style="width: 100%; cursor: pointer;" src="{{url_for('static', filename='images/pizza3.png')}}" />
+        <img onclick="openFull(this.src)" style="width: 100%; cursor: pointer;" src="{{url_for('static', filename='images/pizza4.png')}}" />
+        <img onclick="openFull(this.src)" style="width: 100%; cursor: pointer;" src="{{url_for('static', filename='images/pizza5.png')}}" />
+        <img onclick="openFull(this.src)" style="width: 100%; cursor: pointer;" src="{{url_for('static', filename='images/pizza6.png')}}" />
+        <img onclick="openFull(this.src)" style="width: 100%; cursor: pointer;" src="{{url_for('static', filename='images/pizza7.png')}}" />
+        <img onclick="openFull(this.src)" style="width: 100%; cursor: pointer;" src="{{url_for('static', filename='images/pizza8.png')}}" />
+    </div>
+
+    <script>
+        var divFullimg = document.getElementById("divFullimg");
+        var fullimg = document.getElementById("fullimg");
+
+        function openFull(source){
+            divFullimg.style.display = "flex";
+            fullimg.src = source;
+        }
+
+        function closeFull(){
+            divFullimg.style.display = "none";
+        }
+    </script>
+{% endblock %}

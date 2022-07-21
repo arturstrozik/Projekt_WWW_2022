@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div>
+		<h3><b>Podaj swoje dane, aby zrealizować zamówienie.</b></h3>
+		<form style="width: 60%", method="POST">
+			<div class="input-row">
+				<div class="input-group">
+					<label style="color: #000000">Imię</label>
+					<input style="width: 100%;" type="text" name="first_name" id="first_name" onkeyup="success()" minlength="3" maxlength="50" placeholder="Jan">
+				</div>
+				<div class="input-group">
+					<label style="color: #000000">Nazwisko</label>
+					<input style="width: 100%;" type="text" name="last_name" id="last_name" onkeyup="success()" minlength="3" maxlength="50" placeholder="Kowalski">
+				</div>
+			</div>
+			<div class="input-row">
+				<div class="input-group">
+					<label style="color: #000000">Email</label>
+					<input style="width: 100%;" type="email" name="email" id="email" onkeyup="success()" minlength="3" maxlength="50" placeholder="mia@pizza.pl">
+				</div>
+				<div class="input-group">
+					<label style="color: #000000">Telefon</label>
+					<input style="width: 100%;" type="tel" name="phone" id="phone" onkeyup="success()" minlength="9" maxlength="12" placeholder="123-456-789">
+				</div>
+			</div>
+			<div class="input-row">
+				<div class="input-group">
+					<label style="color: #000000">Ulica i nr domu</label>
+					<input style="width: 100%;" type="text" name="address" id="address" onkeyup="success()" minlength="3" maxlength="50" placeholder="Czarnowiejska 74">
+				</div>
+				<div class="input-group">
+					<label style="color: #000000">Miasto</label>
+					<input style="width: 100%;" type="text" name="city" id="city" onkeyup="success()" minlength="3" maxlength="50" placeholder="Kraków">
+				</div>
+			</div>
+			<a href="{{ url_for('bp_cart.cart_go_to_payment') }}"></a>
+				<p><br><button id="button" class="btn btn-primary" type="submit" disabled>{{ ("Przejdź do podsumowania") }}</button></p>
+			</a>
+		</form>
+	</div>
+
+	<script>
+		function success() {
+			if(document.getElementById("first_name").value==="" ||
+				document.getElementById("last_name").value==="" ||
+				document.getElementById("email").value==="" ||
+				document.getElementById("phone").value==="" ||
+				document.getElementById("address").value==="" ||
+				document.getElementById("city").value==="") { 
+					document.getElementById('button').disabled = true; 
+				} else { 
+					document.getElementById('button').disabled = false;
+				}
+		}
+	</script>
+
+
+{% endblock %}

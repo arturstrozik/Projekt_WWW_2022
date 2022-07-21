@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 style="color: #000000"> Twój koszyk: {% if is_null != 0 %} {{ value }} zł  {% endif %}</h1>
+
+  {% for pizza in pizzas_in_cart %}
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <b style="color: #000000;">{{ pizza.pizza_name }}</b>
+                    {% set href = '/cart/delete/' + pizza.id|string %}
+                    <a href={{href}}>
+                        <button class="btn btn-sm btn-danger" style="float: right; border-radius: 20px;">Usuń</button>
+                    </a>
+                </div>
+                <div class="card-body">
+                    {% set ingredients = '' %}
+                    {% if pizza.is_sauce %}
+                        {% set ingredients = ingredients + 'sos, ' %}
+                    {% endif %}
+                    {% if pizza.is_cheese %}
+                        {% set ingredients = ingredients + 'ser, ' %}
+                    {% endif %}
+                    {% if pizza.is_ham %}
+                        {% set ingredients = ingredients + 'szynka, ' %}
+                    {% endif %}
+                    {% if pizza.is_champignons %}
+                        {% set ingredients = ingredients + 'pieczarki, ' %}
+                    {% endif %}
+                    {% if pizza.is_pepper %}
+                        {% set ingredients = ingredients + 'papryka, ' %}
+                    {% endif %}
+                    {% if pizza.is_olives %}
+                        {% set ingredients = ingredients + 'oliwki, ' %}
+                    {% endif %}
+                    {% if pizza.is_bacon %}
+                        {% set ingredients = ingredients + 'boczek, ' %}
+                    {% endif %}
+                    {% if pizza.is_corn %}
+                        {% set ingredients = ingredients + 'kukurydza, ' %}
+                    {% endif %}
+                    {% if pizza.is_tuna %}
+                        {% set ingredients = ingredients + 'tuńczyk, ' %}
+                    {% endif %}
+                    {% if pizza.is_pineapple %}
+                        {% set ingredients = ingredients + 'ananas, ' %}
+                    {% endif %}
+            
+                    <p style="text-align:left; color: #000000;">
+                        {{ ingredients[:-2] }}
+                        <span style="float:right; color: #000000;">
+                            Rozmiar: {{ pizza.size }} cm | Cena: {{ pizza.price }} zł 
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+  {% endfor %}
+
+  {% if is_null != 0 %}
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('bp_cart.cart_go_to_payment') }}">
+        <button class="btn btn-info">{{ ("Zamawiam") }}</button>
+        </a>
+    </div>
+  {% else %}
+    <h3 style="color: #000000;">Przejdź do <a href="/menu">menu</a>, aby wybrać pizze.</h3>
+    <img style="width: 100%;" src="{{url_for('static', filename='images/kup_pizze.png')}}" />
+  {% endif %}
+
+
+
+{% endblock %}

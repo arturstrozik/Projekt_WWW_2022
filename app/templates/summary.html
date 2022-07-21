@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 style="color: #000000"> Podsumowanie: </h1>
+    <div>
+		<h3><b>Twoje dane:</b></h3>
+		<form style="width: 60%">
+			<div class="input-row">
+				<div class="input-group">
+					<label style="color: #000000">Imię</label>
+					<input style="width: 100%;" type="text" value="{{order.first_name|safe}}" readonly>
+				</div>
+				<div class="input-group">
+					<label style="color: #000000">Nazwisko</label>
+					<input style="width: 100%;" type="text" value="{{order.last_name|safe}}" readonly>
+				</div>
+			</div>
+			<div class="input-row">
+				<div class="input-group">
+					<label style="color: #000000">Email</label>
+					<input style="width: 100%;" type="email" value="{{order.email|safe}}" readonly>
+				</div>
+				<div class="input-group">
+					<label style="color: #000000">Telefon</label>
+					<input style="width: 100%;" type="tel" value="{{order.phone_number|safe}}" readonly>
+				</div>
+			</div>
+			<div class="input-row">
+				<div class="input-group">
+					<label style="color: #000000">Ulica i nr domu</label>
+					<input style="width: 100%;" type="text" value="{{order.street_and_house_number|safe}}" readonly>
+				</div>
+				<div class="input-group">
+					<label style="color: #000000">Miasto</label>
+					<input style="width: 100%;" type="text" value="{{order.city|safe}}" readonly>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<h3><b>Zamówione pizze:</b></h3>
+
+	{% for pizza in pizzas_in_cart %}
+		<div class="row mt-4">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<b style="color: #000000;">{{ pizza.pizza_name }}</b>
+					</div>
+					<div class="card-body">
+						{% set ingredients = '' %}
+						{% if pizza.is_sauce %}
+							{% set ingredients = ingredients + 'sos, ' %}
+						{% endif %}
+						{% if pizza.is_cheese %}
+							{% set ingredients = ingredients + 'ser, ' %}
+						{% endif %}
+						{% if pizza.is_ham %}
+							{% set ingredients = ingredients + 'szynka, ' %}
+						{% endif %}
+						{% if pizza.is_champignons %}
+							{% set ingredients = ingredients + 'pieczarki, ' %}
+						{% endif %}
+						{% if pizza.is_pepper %}
+							{% set ingredients = ingredients + 'papryka, ' %}
+						{% endif %}
+						{% if pizza.is_olives %}
+							{% set ingredients = ingredients + 'oliwki, ' %}
+						{% endif %}
+						{% if pizza.is_bacon %}
+							{% set ingredients = ingredients + 'boczek, ' %}
+						{% endif %}
+						{% if pizza.is_corn %}
+							{% set ingredients = ingredients + 'kukurydza, ' %}
+						{% endif %}
+						{% if pizza.is_tuna %}
+							{% set ingredients = ingredients + 'tuńczyk, ' %}
+						{% endif %}
+						{% if pizza.is_pineapple %}
+							{% set ingredients = ingredients + 'ananas, ' %}
+						{% endif %}
+				
+						<p style="text-align:left; color: #000000;">
+							{{ ingredients[:-2] }}
+							<span style="float:right; color: #000000;">
+								Rozmiar: {{ pizza.size }} cm | Cena: {{ pizza.price }} zł 
+							</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+    {% endfor %}
+	
+	<h2 style="margin-top: 25px;"><b>Cena: {{ order.order_value|safe }} zł</b></h2>
+
+	<div>
+		<form action="https://ssl.dotpay.pl/test_payment/" method="post" target="_parent">
+			<div class="dp_temat">Wybierz kwotę</div>
+                 <input type="hidden" name="type" value="0" />
+                 <input type="hidden" name="currency" value="PLN" />
+		 		 <input type="hidden" name="amount" value="{{ order.order_value|safe }}" />
+                 <input type="hidden" name="id" value="703565" />
+                 <input type="hidden" name="description" value="Testowa płatność" />
+			     <input type="hidden" name="firstname" value="{{order.first_name|safe}}" />
+			     <input type="hidden" name="lastname" value="{{order.last_name|safe}}" />
+			     <input type="hidden" name="email" value="{{order.email|safe}}" />
+                 <input type="hidden" name="url" value="https://s407396.labagh.pl/cart/success" />
+                 <input type="hidden" name="buttontext" id="buttontext" value="Powrót do sprzedawcy" />
+            <p><br><button class="btn btn-info">Zapłać</button></p>
+         </form>
+     </div> 
+
+{% endblock %}
