@@ -6,4 +6,4 @@ This project presents the website of a pizzeria. The user can choose pizzas with
 
 - [@arturstrozik](https://github.com/arturstrozik)
 - [@szymonjask](https://github.com/szymonjask)
-- [@szklanyparkiet](https://github.com/szklanyparkiet)
+- [@pompaFunebris](https://github.com/pompaFunebris)
